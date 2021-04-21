@@ -1,8 +1,8 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import AppLoading from 'expo-app-loading';
-import { UserIdentification } from './src/screens/UserIdentification';
-import {
+import { Confirmation } from './src/screens/Confirmation';
+import {  
   useFonts,
   Jost_400Regular,
   Jost_600SemiBold
@@ -20,7 +20,7 @@ export default function App(){
   
   return (
     <SafeAreaView style={styles.container}>
-      <UserIdentification />
+      <Confirmation />
     </SafeAreaView>
   );
 };
