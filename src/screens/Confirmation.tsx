@@ -26,7 +26,9 @@ export function Confirmation(){
                     plantinhas com muito cuidado.
                 </Text>
                 <View style={styles.footer}>
-                    <Button />
+                    <Button 
+                        label="Começar"
+                    />
                 </View>
             </View>
         </SafeAreaView>
