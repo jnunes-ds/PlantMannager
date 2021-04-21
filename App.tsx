@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, View, Text } from 'react-native';
+import { SafeAreaView, StyleSheet } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import { UserIdentification } from './src/screens/UserIdentification';
 import {
