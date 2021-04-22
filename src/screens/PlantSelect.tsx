@@ -56,11 +56,15 @@ export function PlantSelect(){
         }
 
         const filtered = plants.filter(plant => {
-            plant.environments.includes(environment);
+            if(plant.environments.includes(environment)){
+                let filteredList: Array<string> = new Array();
+                filteredList.push(plant);
+                return filteredList;
+            }
         });
-
+        
         setFilteredPlants(filtered);
-            
+        
     }
 
     function handleFetchMore(distance: number){
@@ -134,10 +138,10 @@ export function PlantSelect(){
                     data={environments}
                     renderItem={({ item }) => (
                         <EnvironmentButton 
-                            title={item.title}
-                            onPress={() => {handleEnvironmentSelected(item.key)}}
-                            active={
-                                item.key === environmentSelected
+                        title={item.title}
+                        onPress={() => handleEnvironmentSelected(item.key)}
+                        active={
+                            item.key === environmentSelected
                             }
                         />
                     )}
