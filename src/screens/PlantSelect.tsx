@@ -16,6 +16,7 @@ import api from '../services/api';
 
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
+import { PlantProps } from '../libs/storage';
 
 
 interface EnvironmentProps{
@@ -23,24 +24,13 @@ interface EnvironmentProps{
     title: string
 }
 
-interface PlantsProps{
-    id: string;
-    name: string;
-    about: string;
-    water_tips: string;
-    photo: string;
-    environments: Array<string>;
-    frequency: {
-        times: number;
-        repeat_every: string;
-    }
-}
+
 
 export function PlantSelect(){
 
     const [environments, setEnvironments] = useState<EnvironmentProps[]>([]);
-    const [plants, setPlants] = useState<PlantsProps[]>([]);
-    const [filteredPlants, setFilteredPlants] = useState<PlantsProps[]>([]);
+    const [plants, setPlants] = useState<PlantProps[]>([]);
+    const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>([]);
     const [environmentSelected, setEnvironmentSelected] = useState('all');
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -78,7 +68,7 @@ export function PlantSelect(){
             fetchPlants();
     }
 
-    function handlePlantSelect(plant: PlantsProps){
+    function handlePlantSelect(plant: PlantProps){
         navigation.navigate('PlantSave', { plant });
     }
 
