@@ -13,6 +13,7 @@ import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 
 export function Confirmation(){
+    
     const navigation = useNavigation();
     
     function handleMoveOn(){

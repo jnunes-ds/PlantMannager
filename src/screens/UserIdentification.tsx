@@ -23,6 +23,7 @@ export function UserIdentification(){
     const [isFilled, setIsFilled] = useState(false);
     const [name, setName] = useState<string>();
 
+
     const navigation = useNavigation();
 
     function handleInputBlur(){
@@ -39,11 +40,11 @@ export function UserIdentification(){
         setName(value);
     }
 
-    async function handleSubmit():Promise<void>{
+    async function handleSubmit(){
         if(!name){
             Alert.alert('Me diz como chamar você 😢')
         }else{
-            await AsyncStorage.setItem('@plantmanager:user', name);
+            await AsyncStorage.setItem('@plantmanager:user', name||'');
             navigation.navigate('Confirmation');
         }
     }
