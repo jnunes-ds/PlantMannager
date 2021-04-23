@@ -8,7 +8,9 @@ import {
     TouchableWithoutFeedback,
     Platform,
     Keyboard,
+    Alert,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { Button } from '../components/Button';
 
@@ -37,8 +39,13 @@ export function UserIdentification(){
         setName(value);
     }
 
-    function handleSubmit():void{
-        navigation.navigate('Confirmation');
+    async function handleSubmit():Promise<void>{
+        if(!name){
+            Alert.alert('Me diz como chamar você 😢')
+        }else{
+            await AsyncStorage.setItem('@plantmanager:user', name);
+            navigation.navigate('Confirmation');
+        }
     }
 
     return (
