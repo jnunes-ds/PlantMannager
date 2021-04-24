@@ -19,7 +19,7 @@ import { Button } from '../components/Button';
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 import { format, isBefore } from 'date-fns';
-import { PlantProps,savePlant } from '../libs/storage';
+import { loadPlant, PlantProps,savePlant } from '../libs/storage';
 
 
 interface Params{
@@ -51,6 +51,7 @@ export function PlantSave(){
     function handleOpenDateTimePickerForAndroid(){
         setShowDatePicker(oldState => !oldState);
     }
+
 
     async function handleSave(){
         try {

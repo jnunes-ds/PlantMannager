@@ -11,7 +11,7 @@ import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 
-const userImg: ImageBitmap = require('../assets/girlProfile.jpeg');
+const userImg: ImageBitmap = require('../assets/profile.jpeg');
 
 
 export function Header(){
