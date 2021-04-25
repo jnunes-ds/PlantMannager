@@ -52,6 +52,17 @@ export function EditProfile(){
     useEffect(() => {
         (async () => {
             if(Platform.OS !== 'web'){
+                const { status } = await ImagePicker.requestCameraPermissionsAsync();
+                if(status !== 'granted'){
+                    Alert.alert('Atenção','Precisamos que você nos conceda o acesso à sua galeria para prossegir')
+                }
+            }
+        })();
+    },[]);
+
+    useEffect(() => {
+        (async () => {
+            if(Platform.OS !== 'web'){
                 const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
                 if(status !== 'granted'){
                     Alert.alert('Atenção','Precisamos que você nos conceda o acesso à sua galeria para prossegir')
@@ -60,7 +71,7 @@ export function EditProfile(){
         })();
     },[]);
 
-    const pickImage: VoidFunction = async () => {
+    const takeASelf: VoidFunction = async () => {
         let result = await ImagePicker.launchCameraAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
@@ -75,6 +86,34 @@ export function EditProfile(){
                 Alert.alert('Não foi possível carregar a foto 😞')
             }
         }
+    }
+
+    const pickImageFromGallery: VoidFunction = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync()
+
+        if(!result.cancelled){
+            try{
+                await setImageProfile(result.uri);
+            }catch{
+                Alert.alert('Não foi possível carregar a foto 😞')
+            }
+        }
+    }
+
+    function chooseBetweenCameraAndGallery(){
+        Alert.alert('Escolha uma foto', 'Escolha uma foto de sua preferência a partir da galeria ou da câmera', [
+            {
+                text: 'Escolha da caleria',
+                onPress: () => pickImageFromGallery()
+            },
+            {
+                text: 'Tirar agora com a câmera',
+                onPress: () => takeASelf()
+            },
+            {
+                text: 'Cancelar'
+            }
+        ])
     }
 
     const saveChanges: VoidFunction = async () => {
@@ -116,12 +155,18 @@ export function EditProfile(){
             },
             {
                 text: 'Escolher outra foto',
-                onPress: () => pickImage()
+                onPress: () => chooseBetweenCameraAndGallery()
             }
         ])
     }
 
-    
+    function imageProfileIsDefault(){
+        if(imageProfile == defaultImageProfileAdress){
+            chooseBetweenCameraAndGallery();
+        }else{
+            chooseToChangeOrDelete();
+        }
+    }
 
     return (
 
@@ -138,7 +183,7 @@ export function EditProfile(){
             </View>
             <TouchableOpacity
                 style={styles.imageProfileContainer}
-                onPress={chooseToChangeOrDelete}
+                onPress={imageProfileIsDefault}
             >
                 <Image 
                     source={{ uri: `${imageProfile}` }}

@@ -30,7 +30,7 @@ export function Header(){
         }
 
         loadStorageUserName();
-    },);
+    },[]);
 
     useEffect(() => {
         async function loadStorageImageProfile(){
@@ -39,7 +39,7 @@ export function Header(){
         }
 
         loadStorageImageProfile();
-    });
+    },[]);
 
     async function editProfile(): Promise<void>{
         await navigation.navigate('EditProfile')

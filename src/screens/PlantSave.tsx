@@ -19,7 +19,7 @@ import { Button } from '../components/Button';
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 import { format, isBefore } from 'date-fns';
-import { loadPlant, PlantProps,savePlant } from '../libs/storage';
+import { PlantProps,savePlant } from '../libs/storage';
 
 
 interface Params{
