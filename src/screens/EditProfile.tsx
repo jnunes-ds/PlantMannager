@@ -23,6 +23,11 @@ export function EditProfile(){
     const navigation = useNavigation();
 
 
+    const getCurrentImageProfile: VoidFunction = async() => {
+        const img = await AsyncStorage.getItem('@plantmanager:imageProfile');
+        await setImageProfile(img || defaultImageProfileAdress);
+    }
+
     useEffect(() => {
         (async () => {
             if(Platform.OS !== 'web'){
@@ -51,7 +56,7 @@ export function EditProfile(){
         }
     }
 
-    async function saveChanges(){
+    const saveChanges: VoidFunction = async () => {
         saveImageProfile(imageProfile);
         navigation.navigate('Confirmation', {
             title: 'Pronto!',
@@ -63,7 +68,7 @@ export function EditProfile(){
     }
 
     
-    
+    getCurrentImageProfile();
 
     return (
 
