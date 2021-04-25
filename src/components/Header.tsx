@@ -15,9 +15,6 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/core';
 
 
-const userImg: ImageBitmap = require('../assets/profile.png');
-
-
 export function Header(){
     const [userName, setUserName] = useState<string>();
     const defaultImageProfileAdress = 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png';
@@ -33,7 +30,7 @@ export function Header(){
         }
 
         loadStorageUserName();
-    },[]);
+    },);
 
     useEffect(() => {
         async function loadStorageImageProfile(){
@@ -42,19 +39,10 @@ export function Header(){
         }
 
         loadStorageImageProfile();
-    },[]);
+    });
 
-    function editProfile():void{
-        Alert.alert('Editar', 'Deseja editar as informações do seu perfil?', [
-            {
-                text: 'Não',
-                style: 'cancel'
-            },
-            {
-                text: 'sim',
-                onPress: async () => await navigation.navigate('EditProfile')
-            }
-        ])
+    async function editProfile(): Promise<void>{
+        await navigation.navigate('EditProfile')
     }
 
     return (

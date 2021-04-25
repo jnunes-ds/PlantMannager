@@ -15,18 +15,39 @@ import fonts from '../styles/fonts';
 import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/core';
-import { saveImageProfile } from '../libs/storage';
+import { saveImageProfile, saveUserName } from '../libs/storage';
 
 export function EditProfile(){
     const defaultImageProfileAdress = 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png';
     const [imageProfile, setImageProfile] = useState<string>(defaultImageProfileAdress);
+    const [userName, setUserName] = useState<string>('fefew');
     const navigation = useNavigation();
 
 
-    const getCurrentImageProfile: VoidFunction = async() => {
-        const img = await AsyncStorage.getItem('@plantmanager:imageProfile');
-        await setImageProfile(img || defaultImageProfileAdress);
-    }
+    useEffect(() => {
+        const getCurrentImageProfile: VoidFunction = async() => {
+            const img = await AsyncStorage.getItem('@plantmanager:imageProfile');
+            if(!img || img == ''){
+                saveImageProfile(defaultImageProfileAdress);
+            }
+            await setImageProfile(img || defaultImageProfileAdress);
+        }
+
+        getCurrentImageProfile();
+
+    },[]);
+
+    useEffect(() => {
+        const getCurrentUserName: VoidFunction = async () => {
+            const name = await AsyncStorage.getItem('@plantmanage:user');
+            setUserName(name || '');
+        }
+
+        getCurrentUserName();
+
+    },[]);
+
+    
 
     useEffect(() => {
         (async () => {
@@ -58,6 +79,7 @@ export function EditProfile(){
 
     const saveChanges: VoidFunction = async () => {
         saveImageProfile(imageProfile);
+        saveUserName(userName);
         navigation.navigate('Confirmation', {
             title: 'Pronto!',
             subtitle: 'Seu perfil foi alterado com sucesso!',
@@ -67,8 +89,39 @@ export function EditProfile(){
         })
     }
 
+    function handleInputChange(value: string){
+        setUserName(value);
+    }
+
+    function removeImageProfile(){
+        setImageProfile(defaultImageProfileAdress);
+    }
+
+    function chooseToChangeOrDelete(){
+        Alert.alert('Foto de perfil:', 'deseja alterar a foto de perfil?', [
+            {
+                text: 'Excluir Foto',
+                onPress: () => Alert.alert('Atenção!', 'Tem certeza que deseja deletar a foto de perfil?', [
+                    {
+                        text: 'Não'
+                    },
+                    {
+                        text: 'Sim',
+                        onPress: () => removeImageProfile()
+                    }
+                ])
+            },
+            {
+                text: 'Cancelar',
+            },
+            {
+                text: 'Escolher outra foto',
+                onPress: () => pickImage()
+            }
+        ])
+    }
+
     
-    getCurrentImageProfile();
 
     return (
 
@@ -85,7 +138,7 @@ export function EditProfile(){
             </View>
             <TouchableOpacity
                 style={styles.imageProfileContainer}
-                onPress={pickImage}
+                onPress={chooseToChangeOrDelete}
             >
                 <Image 
                     source={{ uri: `${imageProfile}` }}
@@ -102,7 +155,8 @@ export function EditProfile(){
 
             <TextInput 
                 style={styles.input}
-                placeholder="Digite o seu nome"
+                placeholder={"Digite o seu nome"}
+                onChangeText={handleInputChange}
             />
 
             <View style={styles.footer}>

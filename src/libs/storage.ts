@@ -130,3 +130,14 @@ export async function saveImageProfile(uri: string){
     }
     
 }
+
+export async function saveUserName(name:string) {
+    try{
+        if(!name || name == ''){
+            return
+        }
+        await AsyncStorage.setItem('@plantmanager:user', name||'');
+    }catch{
+        Alert.alert('Não foi possível modificar o seu nome 😞')
+    }
+}
