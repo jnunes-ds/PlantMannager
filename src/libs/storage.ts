@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
 import { format } from 'date-fns';
+import { Alert } from 'react-native';
 
 export interface PlantProps {
     id: string;
@@ -118,4 +119,14 @@ export async function removePlant(id: string): Promise<void>{
         '@plantmanager:plants',
         JSON.stringify(plants)
 );
+}
+
+export async function saveImageProfile(uri: string){
+    try{
+        await AsyncStorage.setItem('@plantmanager:imageProfile', uri);
+        
+    }catch{
+        Alert.alert('Não foi possível salvar a imagem. 😞')
+    }
+    
 }
