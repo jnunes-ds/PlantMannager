@@ -75,7 +75,7 @@ export async function savePlant(plant:PlantProps): Promise<void> {
         })
         )
 
-    }catch(error){
+    }catch(error : any){
         throw new Error(error);
     }
 }
@@ -102,7 +102,7 @@ export async function loadPlant(): Promise<PlantProps[]> {
 
             return plantsSorted;
 
-    }catch(error){
+    }catch(error : any){
         throw new Error(error);
     }
 }
