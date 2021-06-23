@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Notifications from 'expo-notifications';
 import { format } from 'date-fns';
 import { Alert } from 'react-native';
+import api from '../services/api';
 
 export interface PlantProps {
     id: string;
@@ -80,8 +81,22 @@ export async function savePlant(plant:PlantProps): Promise<void> {
     }
 }
 
+async function getPlantsFromApi(){
+    try {
+        const { data } = await api.get('');
+        if(!data){
+            console.log('perainda ...');
+        }
+        console.log(data);
+    } catch (error: any) {
+        
+    }
+}
+
 export async function loadPlant(): Promise<PlantProps[]> {
     try {
+        await getPlantsFromApi();
+
         const data = await AsyncStorage.getItem('@plantmanager:plants');
         const plants = data ? (JSON.parse(data) as StoragePlantProps) : {};
 
