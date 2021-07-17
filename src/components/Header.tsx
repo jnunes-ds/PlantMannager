@@ -9,8 +9,8 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 
-import colors from '../styles/colors';
-import fonts from '../styles/fonts';
+import colors from '../global/styles/colors';
+import fonts from '../global/styles/fonts';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/core';
 

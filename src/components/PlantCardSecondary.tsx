@@ -10,8 +10,8 @@ import { RectButton, RectButtonProps } from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { color } from 'react-native-reanimated';
 import { SvgFromUri } from 'react-native-svg';
-import colors from '../styles/colors';
-import fonts from '../styles/fonts';
+import colors from '../global/styles/colors';
+import fonts from '../global/styles/fonts';
 
 interface PlantProps extends RectButtonProps{
     data: {

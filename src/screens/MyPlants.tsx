@@ -8,14 +8,14 @@ import {
 } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { Header } from '../components/Header';
-import colors from '../styles/colors';
 import waterdrop from '../assets/waterdrop.png';
 import { loadPlant, PlantProps, removePlant } from '../libs/storage';
 import { formatDistance } from 'date-fns';
 import { pt } from 'date-fns/locale';
-import fonts from '../styles/fonts';
-import { PlantCardSecondary } from '../components/PlantCardSecondary';
 import { Load } from '../components/Load';
+import { PlantCardSecondary } from '../components/PlantCardSecondary';
+import colors from '../global/styles/colors';
+import fonts from '../global/styles/fonts';
 
 
 export function MyPlants(){
@@ -92,7 +92,7 @@ export function MyPlants(){
                 <Text style={styles.plantsTitle}>
                     Próximas regadas
                 </Text>
-
+                
                 <FlatList 
                     data={myPlants}
                     keyExtractor={(item) => String(item.id)}

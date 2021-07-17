@@ -14,8 +14,8 @@ import { Load } from '../components/Load';
 import { PlantCardPrimary } from '../components/PlantCardPrimary';
 import api from '../services/api';
 
-import colors from '../styles/colors';
-import fonts from '../styles/fonts';
+import colors from '../global/styles/colors';
+import fonts from '../global/styles/fonts';
 import { PlantProps } from '../libs/storage';
 
 

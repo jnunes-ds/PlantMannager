@@ -7,11 +7,10 @@ import {
 import { Feather } from '@expo/vector-icons';
 
 import wateringImg from '../assets/watering.png';
-import colors from '../styles/colors';
-import fonts from '../styles/fonts';
+import colors from '../global/styles/colors';
+import fonts from '../global/styles/fonts';
 import { useNavigation } from '@react-navigation/core';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
 
 export function Welcome(){
     const navigation = useNavigation();
@@ -19,7 +18,7 @@ export function Welcome(){
     async function handleStart(){
         navigation.navigate('UserIdentification')
     }
-
+    
     return (
         <View style={styles.container}>
             <Text style={styles.title}>
